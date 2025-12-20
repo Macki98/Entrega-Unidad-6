@@ -5,13 +5,17 @@
 
 #include "raylib.h"
 
+#define WINDOW_WIDTH 1080;
+#define WINDOW_HEIGTH 720;
+
 class Game
 {
 public:
 
-	int width;
-	int heigth;
-	const char* title;
+	int width = WINDOW_WIDTH;
+	int heigth = WINDOW_HEIGTH;
+
+	const char* title = "Operacion: furia cinetica. Leonel Mc Cormack";
 
 	Game();
 	~Game();

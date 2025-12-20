@@ -2,9 +2,6 @@
 
 Game::Game()
 {
-	width = 1080;
-	heigth = 720;
-	title = "Operacion: furia cinetica. Leonel Mc Cormack";
 
 }
 
