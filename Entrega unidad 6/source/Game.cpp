@@ -10,13 +10,14 @@ Game::~Game()
 }
 
 
-void Game::DrawGame()
-{
+void Game::DrawGame(){
+
 	player.DrawPlayer();
 	
-	for (Projectile& projectile: player.projectiles){
+	for (auto& projectile : player.projectiles) {
 		projectile.DrawProjectile();
 	}
+
 }
 
 void Game::Events()
