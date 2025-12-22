@@ -1,6 +1,9 @@
 #pragma once
 #include "raylib.h"
 
+#include "Projectile.h"
+
+#include <vector>
 
 class Player
 {
@@ -26,6 +29,9 @@ public:
 	void DrawPlayer();
 
 	void Aim();
-	void Shot();
+	void FireProjectile();
+
+	std::vector<Projectile> projectiles;
+
 };
 

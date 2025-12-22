@@ -13,7 +13,7 @@ class Game
 private:
 
 	Player player;
-
+	
 
 public:
 
@@ -25,7 +25,7 @@ public:
 
 	void Events();
 
-	void Update();
+	void UpdateGame();
 
 	
 

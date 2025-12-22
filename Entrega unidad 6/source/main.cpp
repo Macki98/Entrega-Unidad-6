@@ -7,6 +7,7 @@
 #include "Game.h"
 
 
+
 int main(void)
 {
     int window_width = 1080;
@@ -20,17 +21,20 @@ int main(void)
 
     Game* game = new Game();
 
-
+   
     // Bucle principal del juego (se repite hasta que se cierre la ventana)
     while (!WindowShouldClose())
     {
+        game->Events();
+        game->UpdateGame();
+        
         // Iniciamos la etapa de dibujo
         BeginDrawing();
 
         ClearBackground(LIGHTGRAY);
         
         game->DrawGame();
-
+       
         // Finalizamos el dibujo
         EndDrawing();
     }

@@ -1,9 +1,9 @@
 #include "Player.h"
 
 
-
 Player::Player()
 {
+
 	player_texture = LoadTexture("Assets/Player.png");
 
 	lifes = 5;
@@ -35,6 +35,7 @@ void Player::Aim()
 {
 }
 
-void Player::Shot()
+void Player::FireProjectile()
 {
+	projectiles.push_back(Projectile({ player_position.x,player_position.y }));
 }
