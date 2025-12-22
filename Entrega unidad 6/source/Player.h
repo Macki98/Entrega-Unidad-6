@@ -13,6 +13,8 @@ private:
 	Vector2 player_angle;
 
 	Texture2D player_texture;
+	
+	float player_scale;
 
 public:
 
@@ -20,6 +22,8 @@ public:
 	~Player();
 
 	bool ItsPlayerAlive();
+
+	void DrawPlayer();
 
 	void Aim();
 	void Shot();

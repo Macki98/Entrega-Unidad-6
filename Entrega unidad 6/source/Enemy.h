@@ -10,10 +10,13 @@ class Enemy
 private:
 
 	Vector2 enemy_position;
+
 	Vector2 enemy_velocity;
 	
-	Texture2D enemy_texture;
-	const float enemy_gravity;
+	Texture2D enemy_alien_texture;
+	Texture2D enemy_asteroid_texture;
+
+	const float enemy_gravity = 500.f;
 
 public:
 	Enemy();

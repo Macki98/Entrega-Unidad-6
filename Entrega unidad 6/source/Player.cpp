@@ -1,18 +1,19 @@
 #include "Player.h"
 
-#include "Game.h"
+
 
 Player::Player()
 {
+	player_texture = LoadTexture("Assets/Player.png");
 
 	lifes = 5;
 
-	player_position = { 0, 720 };
-
 	player_angle = { 0,0 };
 
-	player_texture = LoadTexture();
+	player_scale = 0.3f;
 
+	player_position.x = 0;
+	player_position.y = GetScreenHeight() - (player_texture.height * player_scale);
 }
 
 Player::~Player()
@@ -23,6 +24,11 @@ Player::~Player()
 bool Player::ItsPlayerAlive()
 {
 	return false;
+}
+
+void Player::DrawPlayer()
+{
+	DrawTextureEx(player_texture,player_position,0,player_scale,WHITE);
 }
 
 void Player::Aim()

@@ -6,11 +6,20 @@
 
 #include "Game.h"
 
+
 int main(void)
 {
-    Game* partida = new Game();
+    int window_width = 1080;
+    int window_heigth = 720;
 
-    partida->init_game();
+    const char* title = "Operacion: furia cinetica. Leonel Mc Cormack";
+
+    InitWindow(window_width,window_heigth,title);
+    SetTargetFPS(60);
+
+
+    Game* game = new Game();
+
 
     // Bucle principal del juego (se repite hasta que se cierre la ventana)
     while (!WindowShouldClose())
@@ -20,6 +29,8 @@ int main(void)
 
         ClearBackground(LIGHTGRAY);
         
+        game->DrawGame();
+
         // Finalizamos el dibujo
         EndDrawing();
     }

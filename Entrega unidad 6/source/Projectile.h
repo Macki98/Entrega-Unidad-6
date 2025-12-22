@@ -6,8 +6,8 @@ class Projectile
 private:
 	Vector2 projectile_position;
 	Vector2 projectile_velocity;
-	float acceleration;
-	const float projectile_gravity;
+	float projectile_acceleration;
+	const float projectile_gravity = 500.0f;
 
 	Texture2D projectile_texture;
 

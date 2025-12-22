@@ -9,8 +9,8 @@ Game::~Game()
 {
 }
 
-void Game::init_game()
+
+void Game::DrawGame()
 {
-	InitWindow(width, heigth, title);
-	SetTargetFPS(60);
+	player.DrawPlayer();
 }
