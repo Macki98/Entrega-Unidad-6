@@ -15,7 +15,7 @@ void Game::DrawGame(){
 	player.DrawPlayer();
 	
 	for (auto& projectile : player.projectiles) {
-		projectile.DrawProjectile();
+		projectile->DrawProjectile();
 	}
 
 }
@@ -31,7 +31,7 @@ void Game::Events()
 void Game::UpdateGame()
 {
 	for (auto& projectile: player.projectiles){
-		projectile.UpdateProjectile();
+		projectile->UpdateProjectile();
 	}
 
 }
