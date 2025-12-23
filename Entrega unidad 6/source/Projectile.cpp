@@ -1,7 +1,7 @@
 #include "Projectile.h"
 #include <iostream>
 
-Projectile::Projectile(Vector2 projectile_position)
+Projectile::Projectile(Vector2 projectile_position, Vector2 projectile_velocity)
 {
 	projectile_acceleration = 0.0f;
 	projectile_texture = LoadTexture("Assets/Proyectil.png");
@@ -9,8 +9,8 @@ Projectile::Projectile(Vector2 projectile_position)
 
 	
 	this -> projectile_position = projectile_position;
-	projectile_velocity.x = -20.0f;
-	projectile_velocity.y = -20.0f;
+	this -> projectile_velocity = projectile_velocity;
+
 
 	active = true;
 }
@@ -29,7 +29,11 @@ void Projectile::DrawProjectile()
 
 void Projectile::UpdateProjectile()
 {
-	projectile_position.y += projectile_velocity.y;
+	float deltaTime = GetFrameTime();
+
+	projectile_velocity.y += projectile_gravity * deltaTime;
+	projectile_position.x += projectile_velocity.x * deltaTime;
+	projectile_position.y += projectile_velocity.y * deltaTime;
 
 	if (active){
 		if (projectile_position.y > GetScreenHeight() || projectile_position.y < 0) {
@@ -39,4 +43,7 @@ void Projectile::UpdateProjectile()
 		}
 	}
 }
+
+
+
 

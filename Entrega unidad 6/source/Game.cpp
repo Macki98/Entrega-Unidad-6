@@ -22,10 +22,9 @@ void Game::DrawGame(){
 
 void Game::Events()
 {
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		player.FireProjectile();
-	}
+	player.Aim();
+	player.FireProjectile();
+
 }
 
 void Game::UpdateGame()

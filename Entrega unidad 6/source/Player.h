@@ -12,7 +12,7 @@ private:
 	int lifes;
 
 	Vector2 player_position;
-	//Vector2 player_turret_position;
+	
 	Rectangle player_turret_source;
 	Rectangle player_turret_dest;
 	Vector2 player_turret_origin;

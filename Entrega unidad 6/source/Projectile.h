@@ -9,7 +9,7 @@ private:
 	Vector2 projectile_position;
 	Vector2 projectile_velocity;
 	float projectile_acceleration;
-	//const float projectile_gravity = 500.0f;
+	const float projectile_gravity = 500.0f;
 
 	Texture2D projectile_texture;
 	float projectile_scale;
@@ -18,13 +18,15 @@ private:
 	
 
 public:
-	Projectile(Vector2 projetcile_position);
+	Projectile(Vector2 projetcile_position, Vector2 projectile_velocity);
 	~Projectile();
 
 
 	void DrawProjectile();
 
 	void UpdateProjectile();
+
+	
 
 	bool active;
 
