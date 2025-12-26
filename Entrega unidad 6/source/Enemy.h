@@ -9,22 +9,32 @@ class Enemy
 {
 private:
 
-	Vector2 enemy_position;
-
-	Vector2 enemy_velocity;
-	
-	Texture2D enemy_alien_texture;
-	Texture2D enemy_asteroid_texture;
-
-	const float enemy_gravity = 500.f;
-
 public:
-	Enemy();
+	Enemy(int type, float screen_width, float screen_height);
 	~Enemy();
 
-	void Move();
-	bool ItsEnemyAlive();
+	void EnemyUpdate(float deltaTime);
+	void DrawEnemy();
+	
+	int GetType();
 
+	bool IsOffScreenX();
+	bool IsOffScreenY();
+
+	Rectangle GetEnemyRect();
+
+	Texture2D enemy_texture;
+
+	Vector2 enemy_position;
+
+
+	Vector2 enemy_velocity;
+
+	float enemy_scale;
+
+	const float enemy_gravity = 500.0f;
+
+	int type;
 
 };
 

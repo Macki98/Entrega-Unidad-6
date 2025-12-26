@@ -5,6 +5,7 @@
 
 #include "raylib.h"
 #include "Player.h"
+#include "Enemy.h"
 
 
 class Game
@@ -12,8 +13,17 @@ class Game
 
 private:
 
-	Player player;
+	void DeleteInactiveProjectiles();
 	
+	Player player;
+	std::vector<Enemy*> enemies;
+	
+
+	float spawnTimer = 0.0f;
+	float spawnInterval = 3.5f;
+
+	bool in_game = true;
+
 
 public:
 
@@ -22,12 +32,15 @@ public:
 
 
 	void DrawGame();
+	void DrawGameOver();
+	void DrawWin();
 
 	void Events();
 
 	void UpdateGame();
 
+	void CheckForCollisions();
 	
-
+	void DrawHUD();
 };
 

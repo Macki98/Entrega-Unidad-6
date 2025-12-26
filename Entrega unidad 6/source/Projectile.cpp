@@ -24,7 +24,7 @@ void Projectile::DrawProjectile()
 {
 	if (active)
 		DrawTextureEx(projectile_texture, projectile_position, 0, projectile_scale, WHITE);
-
+	SetTextureFilter(projectile_texture, TEXTURE_FILTER_BILINEAR);
 }
 
 void Projectile::UpdateProjectile()
@@ -36,12 +36,17 @@ void Projectile::UpdateProjectile()
 	projectile_position.y += projectile_velocity.y * deltaTime;
 
 	if (active){
-		if (projectile_position.y > GetScreenHeight() || projectile_position.y < 0) {
+		if (projectile_position.y > GetScreenHeight() || projectile_position.y < 0 || projectile_position.x > GetScreenWidth() || projectile_position.x < 0) {
 			active = false;
-
-			std::cout << "projectile inactive" << std::endl;
 		}
 	}
+}
+
+Rectangle Projectile::GetProjectileRect()
+{
+	return {projectile_position.x,projectile_position.y, 
+	((float)projectile_texture.width * projectile_scale), 
+	((float)projectile_texture.height * projectile_scale)};
 }
 
 

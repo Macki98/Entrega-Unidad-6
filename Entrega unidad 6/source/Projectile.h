@@ -26,7 +26,7 @@ public:
 
 	void UpdateProjectile();
 
-	
+	Rectangle GetProjectileRect();
 
 	bool active;
 

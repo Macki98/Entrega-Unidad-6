@@ -24,18 +24,28 @@ private:
 	
 	float player_scale;
 
+	float points;
 public:
 
 	Player();
 	~Player();
 
-	bool ItsPlayerAlive();
+
 
 	void DrawPlayer();
 
 	void Aim();
 	void FireProjectile();
 
+	void Damage();
+	void Score();
+	float GetScore();
+	int GetLifes();
+
+	float GetAngleX();
+	float GetAngleY();
+
+	Rectangle GetPlayerRect();
 	std::vector<Projectile*> projectiles;
 
 };

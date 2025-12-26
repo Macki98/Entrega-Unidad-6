@@ -8,6 +8,7 @@
 
 
 
+
 int main(void)
 {
     int window_width = 1080;
@@ -20,7 +21,7 @@ int main(void)
 
 
     Game* game = new Game();
-
+   
    
     // Bucle principal del juego (se repite hasta que se cierre la ventana)
     while (!WindowShouldClose())
