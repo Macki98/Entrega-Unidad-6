@@ -18,7 +18,6 @@ private:
 	Vector2 player_turret_origin;
 	float player_turret_rotation;
 	Vector2 player_angle;
-
 	Texture2D player_texture;
 	Texture2D player_turret;
 	
@@ -42,9 +41,10 @@ public:
 	float GetScore();
 	int GetLifes();
 
-	float GetAngleX();
-	float GetAngleY();
+	float GetPlayerAcceleration();
+	float GetAngle();
 
+	void SetLife();
 	Rectangle GetPlayerRect();
 	std::vector<Projectile*> projectiles;
 

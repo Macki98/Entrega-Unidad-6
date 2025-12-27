@@ -7,10 +7,12 @@ Projectile::Projectile(Vector2 projectile_position, Vector2 projectile_velocity)
 	projectile_texture = LoadTexture("Assets/Proyectil.png");
 	projectile_scale = 0.2f;
 
+	projectile_acceleration = -20.0f;
 	
 	this -> projectile_position = projectile_position;
+	
 	this -> projectile_velocity = projectile_velocity;
-
+	
 
 	active = true;
 }
@@ -32,6 +34,7 @@ void Projectile::UpdateProjectile()
 	float deltaTime = GetFrameTime();
 
 	projectile_velocity.y += projectile_gravity * deltaTime;
+	projectile_velocity.x += projectile_acceleration * deltaTime;
 	projectile_position.x += projectile_velocity.x * deltaTime;
 	projectile_position.y += projectile_velocity.y * deltaTime;
 

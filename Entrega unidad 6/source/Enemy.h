@@ -19,7 +19,7 @@ public:
 	int GetType();
 
 	bool IsOffScreenX();
-	bool IsOffScreenY();
+	
 
 	Rectangle GetEnemyRect();
 

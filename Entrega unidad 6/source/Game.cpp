@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-
+	
 }
 
 Game::~Game()
@@ -14,6 +14,8 @@ Game::~Game()
 
 void Game::DrawGame(){
 
+	DrawTexturePro(backgraund, screen, screen, { 0,0 }, 0, WHITE);
+	SetTextureFilter(backgraund, TEXTURE_FILTER_BILINEAR);
 	player.DrawPlayer();
 	
 	for (auto& projectile : player.projectiles) {
@@ -28,6 +30,16 @@ void Game::DrawGame(){
 	DrawHUD();
 }
 
+void Game::DrawGameOver()
+{
+	
+	DrawText("GAME OVER", (float)GetScreenWidth() * 0.3f, (float)GetScreenHeight() / 2, 75, RED);
+	DrawText("Presiona ESC para salir", (float)GetScreenWidth() * 0.3f,500, 20, GRAY);
+}
+
+
+
+
 void Game::Events()
 {
 	player.Aim();
@@ -38,41 +50,48 @@ void Game::Events()
 void Game::UpdateGame()
 {
 
-	//Actualizamos y borramos proyectiles
-	for (auto& projectile: player.projectiles){
-		projectile->UpdateProjectile();
+	if (player.GetLifes() <= 0)
+	{
+		game_over = true;
 	}
-	DeleteInactiveProjectiles();
 	
 
-	//Actualizamos, generamos y borramos enemigos
-	float dt = GetFrameTime();
-	spawnTimer += dt;
+		//Actualizamos y borramos proyectiles
+		for (auto& projectile : player.projectiles) {
+			projectile->UpdateProjectile();
+		}
+		DeleteInactiveProjectiles();
 
-	if (spawnTimer >= spawnInterval)
-	{
-		enemies.push_back(new Enemy(GetRandomValue(1,2), (float)GetScreenWidth(), (float)GetScreenHeight()));
-		spawnTimer = 0.0f;
-	}
+
+		//Actualizamos, generamos y borramos enemigos (aplicamos ademas, daño al jugador si el mismo sale de pantalla)
+		float dt = GetFrameTime();
+		spawnTimer += dt;
+
+		if (spawnTimer >= spawnInterval)
+		{
+			enemies.push_back(new Enemy(GetRandomValue(1, 2), (float)GetScreenWidth(), (float)GetScreenHeight()));
+			spawnTimer = 0.0f;
+		}
+
+		for (auto it = enemies.begin(); it != enemies.end();)
+		{
+			(*it)->EnemyUpdate(dt);
+
+			if ((*it)->IsOffScreenX())
+			{
+				delete* it;
+				it = enemies.erase(it);
+				player.Damage();
+			}
+			else
+			{
+				it++;
+			}
+		}
+
+		//Chequear colisiones
+		CheckForCollisions();
 	
-	for (auto it = enemies.begin(); it != enemies.end();)
-	{
-		(*it)->EnemyUpdate(dt);
-
-		if ((*it)->IsOffScreenX())
-		{
-			delete* it;
-			it = enemies.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
-
-	//Chequear colisiones
-	CheckForCollisions();
-
 }
 
 void Game::CheckForCollisions()
@@ -100,7 +119,7 @@ void Game::CheckForCollisions()
 	//enemigos -> jugador
 	
 	for (auto it = enemies.begin(); it != enemies.end();) {
-		if (CheckCollisionRecs((*it)->GetEnemyRect(), player.GetPlayerRect())) {
+		if (CheckCollisionRecs((*it)->GetEnemyRect(), player.GetPlayerRect())){
 			it = enemies.erase(it);
 			player.Damage();
 			
@@ -116,10 +135,12 @@ void Game::CheckForCollisions()
 void Game::DrawHUD()
 {
 	DrawRectangle(0, 0, 500, 100, Fade(BLACK, 0.5f));
-	DrawText(TextFormat("Vidas: %.1d", player.GetLifes()), 0, 0, 20, BLACK);
-	DrawText(TextFormat("Potencia Y: %.1f Potencia X: %.1f", player.GetAngleY(), player.GetAngleX()), 0, 23, 20, BLACK);
-	DrawText(TextFormat("Puntos:  %.1f", player.GetScore()), 0, 46, 20, BLACK);
+	DrawText(TextFormat("Vidas: %.1d", player.GetLifes()), 0, 0, 20, WHITE);
+	DrawText(TextFormat("Angulo: %.1f", player.GetAngle()), 0, 23, 20, WHITE);
+	DrawText(TextFormat("Potencia: %.1f", player.GetPlayerAcceleration()), 0, 46, 20, WHITE);
+	DrawText(TextFormat("Puntos:  %.1f", player.GetScore()), 0, 69, 20, WHITE);
 }
+
 
 //Eliminamos los proyectiles inactivos para liberar memoria
 void Game::DeleteInactiveProjectiles()

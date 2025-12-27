@@ -11,21 +11,22 @@
 class Game
 {
 
-private:
+public:
 
 	void DeleteInactiveProjectiles();
 	
 	Player player;
 	std::vector<Enemy*> enemies;
 	
-
+	
+	
+	Texture2D backgraund = LoadTexture("Assets/fondo.png");
+	Rectangle screen = { 0,0,(float)GetScreenWidth(),(float)GetScreenHeight() };
 	float spawnTimer = 0.0f;
 	float spawnInterval = 3.5f;
 
-	bool in_game = true;
-
-
-public:
+	Rectangle game_over_rect = { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2, 200,200 };
+	bool game_over = false;
 
 	Game();
 	~Game();
@@ -33,7 +34,8 @@ public:
 
 	void DrawGame();
 	void DrawGameOver();
-	void DrawWin();
+	
+
 
 	void Events();
 
@@ -42,5 +44,7 @@ public:
 	void CheckForCollisions();
 	
 	void DrawHUD();
+
+
 };
 

@@ -26,16 +26,23 @@ int main(void)
     // Bucle principal del juego (se repite hasta que se cierre la ventana)
     while (!WindowShouldClose())
     {
-        game->Events();
-        game->UpdateGame();
+ 
+            game->Events();
+            game->UpdateGame();
         
         // Iniciamos la etapa de dibujo
         BeginDrawing();
 
         ClearBackground(LIGHTGRAY);
         
-        game->DrawGame();
-       
+        if (game->game_over == true)
+        {
+            game->DrawGameOver();
+        }
+        else {
+            game->DrawGame();
+        }
+
         // Finalizamos el dibujo
         EndDrawing();
     }

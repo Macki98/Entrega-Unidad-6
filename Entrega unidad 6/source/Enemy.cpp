@@ -35,7 +35,7 @@ Enemy::Enemy(int type, float scree_width, float screen_height)
 		enemy_position.x = (float)GetRandomValue(scree_width / 2, scree_width);
 		enemy_position.y = 0 - ((float)enemy_texture.height * enemy_scale);
 		enemy_velocity.x = (float)GetRandomValue(50, 100);
-		enemy_velocity.y = 150.0f;//(float)GetRandomValue(80, 100);
+		enemy_velocity.y = 150.0f;
 	}
 
 }
@@ -91,7 +91,13 @@ int Enemy::GetType() {
 
 bool Enemy::IsOffScreenX()
 {
-	return (enemy_position.x <= 0);
+	if (enemy_position.x <= 0) {
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 

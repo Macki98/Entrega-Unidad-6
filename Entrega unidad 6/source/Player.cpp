@@ -10,7 +10,8 @@ Player::Player()
 
 	lifes = 5;
 	player_scale = 0.3f;
-	player_angle = { 200,0 };
+	
+	player_angle = { 150.0f,0 };
 	player_position.x = 0;
 	player_position.y = GetScreenHeight() - (player_texture.height * player_scale);
 
@@ -55,11 +56,11 @@ void Player::FireProjectile()
 {
 	if (IsKeyDown(KEY_UP)) { player_angle.y -= 20.0f; }
 	if (IsKeyDown(KEY_DOWN)) { player_angle.y += 20.0f; }
-	if (IsKeyDown(KEY_RIGHT)) { player_angle.x += 20.0f; }
-	if (IsKeyDown(KEY_LEFT)) { player_angle.x -= 20.0; }
-
+	if (IsKeyDown(KEY_RIGHT)) { player_angle.x += 10.0f; }
+	if (IsKeyDown(KEY_LEFT)) { player_angle.x -= 10.0f; }
+	
 	if (IsKeyPressed(KEY_SPACE)) {
-		projectiles.push_back(new Projectile({ player_turret_origin.x,player_position.y }, { player_angle.x, player_angle.y }));
+		projectiles.push_back(new Projectile({ player_turret_origin.x,player_position.y },{ player_angle.x, player_angle.y }));
 	}
 
 }
@@ -85,14 +86,19 @@ int Player::GetLifes()
 	return lifes;
 }
 
-float Player::GetAngleX()
+float Player::GetPlayerAcceleration()
 {
 	return player_angle.x;
 }
 
-float Player::GetAngleY()
+float Player::GetAngle()
 {
-	return player_angle.y;
+	return player_angle.y * -1;
+}
+
+void Player::SetLife()
+{
+	lifes = 5;
 }
 
 Rectangle Player::GetPlayerRect()
